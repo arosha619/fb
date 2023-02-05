@@ -27,12 +27,22 @@ const studentRouter= require("./routes/students");
 app.use("/student",studentRouter);
 
 
-    app.use(express.static('frontend/build'));
-    app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
-    });
+    // app.use(express.static('frontend/build'));
+    // app.get('*',(req,res)=>{
+    //     res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
+    // });
 
 // servering the frontend
+app.use(express.static(path.join(__dirname,"./frontend/build")));
+app.get("*",function(_,res){
+    res.sendFile(
+        path.join(__dirname,"frontend/build/index.html"),
+        function(err){
+            res.status(500).send(err);
+        }
+    );
+});
+
 
 app.listen(PORT,()=>{
     console.log('server is up and runing on port:',PORT);
