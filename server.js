@@ -33,14 +33,20 @@ app.use("/student",studentRouter);
     // });
 
 // servering the frontend
-app.use(express.static(path.join(__dirname,"./frontend/build")));
-app.get("*",function(_,res){
-    res.sendFile(
-        path.join(__dirname,"./frontend/build/index.html"),
-        function(err){
-            res.status(500).send(err);
-        }
-    );
+// app.use(express.static(path.join(__dirname,"./frontend/build")));
+// app.get("*",function(_,res){
+//     res.sendFile(
+//         path.join(__dirname,"./frontend/build/index.html"),
+//         function(err){
+//             res.status(500).send(err);
+//         }
+//     );
+// });
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 
