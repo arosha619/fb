@@ -26,12 +26,12 @@ connection.once("open",()=>{
 const studentRouter= require("./routes/students");
 app.use("/student",studentRouter);
 
-if(process.env.NODE_ENV ==='production'){
+
     app.use(express.static('frontend/build'));
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
     });
-}
+
 // servering the frontend
 
 app.listen(PORT,()=>{
